@@ -1,15 +1,15 @@
 import NextAuth from "next-auth";
+import GoogleProvider from 'next-auth/providers/google'
+import GithubProvider from "next-auth/providers/github";
+import User from "@/models/user";
+import connectDB from "@/DB/connectdb";
+// import Payment from "@/models/payments";
+// import mongoose from "mongoose";
 // import AppleProvider from 'next-auth/providers/apple'
 // import FacebookProvider from 'next-auth/providers/facebook'
 // import EmailProvider from 'next-auth/providers/email'
-import GoogleProvider from 'next-auth/providers/google'
-import GithubProvider from "next-auth/providers/github";
-import mongoose from "mongoose";
-import User from "@/models/user";
-import Payment from "@/models/payments";
-import connectDB from "@/DB/connectdb";
 
-export const authOptions = NextAuth({
+const handler = NextAuth({
   providers: [
     GithubProvider({
       clientId: process.env.GITHUB_ID,
@@ -38,7 +38,8 @@ export const authOptions = NextAuth({
   callbacks: {
     async signIn({ user, account, profile, email, credentials }) {
       if (account.provider === "github" || account.provider === "google") {
-        const client = await mongoose.connect("mongodb://localhost:27017/coffee");
+        // const client = await mongoose.connect("mongodb://localhost:27017/coffee");
+        await connectDB();
         const currentUser = await User.findOne({ email: user.email });
         if (!currentUser) {
           const newUser = new User({
@@ -53,6 +54,7 @@ export const authOptions = NextAuth({
       }
     },
     async session({ session }) {
+      await connectDB();
       const dbUser = await User.findOne({ email: session.user.email });
       if (dbUser) {
         session.user.name = dbUser.username;
@@ -62,4 +64,4 @@ export const authOptions = NextAuth({
   },
 });
 
-export { authOptions as GET, authOptions as POST };
+export { handler as GET, handler as POST };

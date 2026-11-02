@@ -39,6 +39,7 @@ export const POST = async (request) => {
     );
     return NextResponse.redirect(
       `${process.env.NEXT_PUBLIC_URL}/${encodeURIComponent(updatedPayment.to_user)}?status=${encodeURIComponent(updatedPayment.status)}`,
+      303,
     );
   } else {
     // return NextResponse.redirect(`${process.env.NEXT_PUBLIC_URL}/payment-failed?amount=${p.amount}&name=${p.name}&message=${p.message}`)

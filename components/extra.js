@@ -9,17 +9,17 @@ const extra = () => {
             <div className="flex flex-col items-center ">
                 <img className='' src="/man.gif" width={66} alt="" />
                 <p className='my-2 font-bold text-center'>Help Others</p>
-            <p className='hidden md:inline text-center  '>Lets Help Each Other to Grow Together!</p>
+            <p className=' text-center  '>Lets Help Each Other to Grow Together!</p>
             </div>
             <div className="flex flex-col items-center">
                 <img src="/coin.gif" width={66} alt="" />
                 <p className='my-2 font-bold text-center'>Fund Yourself</p>
-            <p className='hidden md:inline text-center '>Lets Help Each Other to Grow Together!</p>
+            <p className=' text-center  '>Fund your dreams and aspirations!</p>
             </div>
             <div className="flex flex-col items-center">
                 <img src="/group.gif" width={66} alt="" />
                 <p className='my-2 font-bold text-center'>Build Community</p>
-            <p className='hidden md:inline text-center  '>Lets Help Each Other to Grow Together!</p>
+            <p className=' text-center  '>Build community to Grow Together!</p>
             </div>
         </div>
       </div>
